@@ -5,7 +5,7 @@ const venue = {
   title: "Wedding Venue",
   venue: "SA1 Function Hall",
   address: "Rajampeta, Andhra Pradesh",
-  mapLink: "YOUR_GOOGLE_MAP_LINK",
+  mapLink: "https://maps.app.goo.gl/aU86aaocdnXyTVAK6?g_st=ii",
   embedLocation: "SA1+Function+Hall,+Rajampeta",
 };
 
