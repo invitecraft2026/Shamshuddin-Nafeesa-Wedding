@@ -3,23 +3,22 @@ import { Clock, MapPin } from "lucide-react";
 
 const events = [
   {
-    title: "Nikah Ceremony",
-    icon: "🕌",
-    date: "Sunday, May 17, 2026",
-    time: "11:00 AM",
-    venue: "Ajwa Convention Centre",
-    address: "Padapparamb",
+    title: "Shukrana",
+    icon: "🤲",
+    date: "Saturday, August 1, 2026",
+    time: "8:00 PM",
+    venue: "SA1 Function Hall",
+    address: "Rajampeta",
   },
   {
-    title: "Valima Reception",
-    icon: "🏠",
-    date: "Sunday, May 17, 2026",
-    time: "4:00 PM",
-    venue: "Groom House",
-    address: "Puliyodan House, Omanoor",
+    title: "Nikah & Valima",
+    icon: "🕌",
+    date: "Sunday, August 2, 2026",
+    time: "12:00 PM",
+    venue: "SA1 Function Hall",
+    address: "Rajampeta",
   },
 ];
-
 
 const EventDetails = () => {
   return (
@@ -42,7 +41,7 @@ const EventDetails = () => {
         <div className="section-divider" />
       </motion.div>
 
-      <div className="max-w-2xl mx-auto grid gap-6 md:grid-cols-2">
+      <div className="max-w-3xl mx-auto grid gap-6 md:grid-cols-2">
         {events.map((event, i) => (
           <motion.div
             key={event.title}
@@ -54,17 +53,17 @@ const EventDetails = () => {
               duration: 0.6,
             }}
             whileHover={{ y: -5 }}
-            className="glass-card p-8 text-center gold-border"
+            className="glass-card p-8 text-center gold-border rounded-2xl"
           >
-            <span className="text-4xl mb-4 block">
+            <span className="text-5xl mb-5 block">
               {event.icon}
             </span>
 
-            <h3 className="display-text text-2xl text-primary mb-4">
+            <h3 className="display-text text-2xl text-primary mb-5">
               {event.title}
             </h3>
 
-            <div className="space-y-3">
+            <div className="space-y-4">
               <p className="elegant-text text-secondary text-lg font-semibold">
                 {event.date}
               </p>
@@ -77,7 +76,7 @@ const EventDetails = () => {
               </div>
 
               <div
-                className="w-12 h-0.5 mx-auto"
+                className="w-14 h-0.5 mx-auto"
                 style={{
                   background: "var(--gradient-gold)",
                 }}
@@ -85,12 +84,12 @@ const EventDetails = () => {
 
               <div className="flex items-center justify-center gap-2 text-foreground">
                 <MapPin className="w-4 h-4 text-secondary" />
-                <span className="font-body font-semibold text-sm">
+                <span className="font-body font-semibold text-base">
                   {event.venue}
                 </span>
               </div>
 
-              <p className="text-muted-foreground text-xs font-body">
+              <p className="text-muted-foreground text-sm">
                 {event.address}
               </p>
             </div>

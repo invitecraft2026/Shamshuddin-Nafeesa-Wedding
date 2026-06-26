@@ -84,7 +84,7 @@ const Index = () => {
     </p>
 
     <h3 className="display-text text-3xl md:text-4xl text-primary">
-      Anas & Anshidha
+      Shamshuddin & Nafeesa
     </h3>
   </div>
 </footer>

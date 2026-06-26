@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import coupleImage from "/couplephoto.png";
+import coupleImage from "/couplephoto3.png";
 import islamicPattern from "@/assets/islamic-pattern.png";
 
 const HeroSection = () => {
@@ -37,7 +37,7 @@ const HeroSection = () => {
         />
       ))}
 
-      {/* Top Bismillah */}
+      {/* Bismillah */}
       <motion.p
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -48,6 +48,7 @@ const HeroSection = () => {
         ﷽
       </motion.p>
 
+      {/* Quran Verse */}
       <motion.p
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -55,7 +56,7 @@ const HeroSection = () => {
         transition={{ duration: 0.8, delay: 0.2 }}
         className="text-muted-foreground text-[10px] sm:text-xs md:text-sm tracking-[0.15em] sm:tracking-[0.25em] md:tracking-[0.3em] uppercase mb-2 font-body text-center px-4 leading-relaxed"
       >
-        And we created you in pairs (78:8)
+        And We created you in pairs (Surah An-Naba 78:8)
       </motion.p>
 
       <motion.div
@@ -66,6 +67,7 @@ const HeroSection = () => {
         className="section-divider mb-6"
       />
 
+      {/* Quote */}
       <motion.p
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -73,14 +75,9 @@ const HeroSection = () => {
         transition={{ duration: 0.8, delay: 0.4 }}
         className="elegant-text text-muted-foreground text-base md:text-lg italic text-center max-w-xl mb-8"
       >
-        {/* “And We created you in pairs.”
-        <br />
-        <span className="text-sm tracking-widest">
-          (Surah An-Naba 78:8)
-        </span>
-        <br /> */}
         <span className="mt-2 inline-block">
-          By his divine will,We Are To Be Wed
+          With the blessings of Allah (SWT), our hearts unite in love, faith,
+          and mercy as we begin a beautiful journey together.
         </span>
       </motion.p>
 
@@ -92,7 +89,6 @@ const HeroSection = () => {
         transition={{ duration: 1, delay: 0.4 }}
         className="relative mb-8"
       >
-        {/* Golden glow circle */}
         <div
           className="absolute inset-0 -m-10 rounded-full"
           style={{
@@ -115,7 +111,7 @@ const HeroSection = () => {
         />
       </motion.div>
 
-      {/* Names + Parents */}
+      {/* Couple Details */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -125,13 +121,13 @@ const HeroSection = () => {
       >
         {/* Groom */}
         <h1 className="display-text text-5xl md:text-7xl text-primary mb-2">
-          Anas
+          Shamshuddin Nalband
         </h1>
 
         <p className="text-muted-foreground text-sm md:text-base mb-6 leading-relaxed">
-          S/O Mr. Ayyoob & Mrs. Nafeesa
+          S/o Anwar Basha Nalband & Haseena Begum Nalband
           <br />
-          Puliyodan House, Omanoor
+          Nandalur
         </p>
 
         {/* & */}
@@ -141,38 +137,15 @@ const HeroSection = () => {
 
         {/* Bride */}
         <h1 className="display-text text-5xl md:text-7xl text-primary mt-2 mb-2">
-          Anshidha
+          Nafeesa Shaik
         </h1>
 
         <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
-          D/O Mr. Ibrahim & Mrs. Rabiya
+          D/o Zakeer Hussain Shaik & Shajida Shaik
           <br />
-          Kottaparambil House, Kolathur
+          Rajampeta
         </p>
       </motion.div>
-
-      {/* <motion.div
-        initial={{ scaleX: 0 }}
-        whileInView={{ scaleX: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, delay: 0.8 }}
-        className="section-divider mt-8"
-      /> */}
-
-      {/* Bottom Quote */}
-      {/* <motion.p
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, delay: 1 }}
-        className="elegant-text text-muted-foreground text-lg md:text-xl mt-6 italic max-w-lg text-center"
-      >
-        “And We created you in pairs.”
-        <br />
-        <span className="text-sm tracking-widest">
-          — Surah An-Naba 78:8
-        </span>
-      </motion.p> */}
     </section>
   );
 };

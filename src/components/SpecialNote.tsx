@@ -18,24 +18,21 @@ const SpecialNote = () => {
           Special Note
         </p>
 
-        {/* Beautiful Main Text */}
-       <p className="text-primary text-base md:text-xl leading-loose font-serif italic font-medium px-2 md:px-6">
-  As we unite our lives in the grace of
-  <span className="text-secondary font-semibold">
-    {" "}Allah (SWT)
-  </span>,
-  our joy is beautifully doubled to have our
-  <span className="text-secondary font-semibold">
-    {" "}Nikah{" "}
-  </span>
-  solemnized in the blessed presence of
-  <span className="text-primary font-bold">
-    {" "}Syed Muhammed Jamalullaili Thangal
-  </span>,
-  Grand Qazi of Calicut.
-</p>
+        {/* Simple Quote */}
+        <p className="text-primary text-base md:text-xl leading-loose font-serif italic font-medium px-2 md:px-6">
+          With the blessings of
+          <span className="text-secondary font-semibold">
+            {" "}Allah (SWT)
+          </span>
+          , we begin this beautiful journey together.
+          Your presence, prayers, and blessings will make our
+          <span className="text-secondary font-semibold">
+            {" "}Nikah &amp; Valima
+          </span>
+          {" "}even more memorable.
+        </p>
 
-        {/* Small Golden Accent */}
+        {/* Bottom Divider */}
         <div
           className="w-20 h-0.5 mx-auto mt-10"
           style={{

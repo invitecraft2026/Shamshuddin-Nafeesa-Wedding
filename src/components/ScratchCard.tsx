@@ -10,10 +10,10 @@ const ScratchCard = () => {
   // Google Calendar Link
   const googleCalendarLink =
     "https://calendar.google.com/calendar/render?action=TEMPLATE" +
-    "&text=Anas+%26+Anshidha+Wedding" +
-    "&dates=20260517T110000/20260517T130000" +
-    "&details=Nikah+Ceremony+at+Ajwa+Convention+Centre,+Padapparamb" +
-    "&location=Ajwa+Convention+Centre,+Padapparamb" +
+    "&text=Shamshuddin+%26+Nafeesa+Nikah" +
+    "&dates=20260802T120000/20260802T140000" +
+    "&details=Nikah+%26+Valima+Ceremony" +
+    "&location=SA1+Function+Hall,+Rajampeta" +
     "&sf=true&output=xml";
 
   const initCanvas = useCallback(() => {
@@ -107,9 +107,9 @@ const ScratchCard = () => {
 
         <div className="section-divider mb-8" />
 
-        <div className="relative w-full aspect-[3/2] rounded-xl overflow-hidden gold-border">
+       <div className="relative w-full h-[300px] md:h-[340px] rounded-2xl overflow-hidden gold-border">
           {/* Revealed Content */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center bg-primary p-6">
+          <div className="absolute inset-0 bg-[#0d1512] px-6 py-5 text-center flex items-center justify-center">
             <motion.div
               initial={false}
               animate={
@@ -117,43 +117,43 @@ const ScratchCard = () => {
                   ? { opacity: 1, scale: 1 }
                   : { opacity: 0.3, scale: 0.95 }
               }
-              className="text-center"
+             className="flex flex-col items-center"
             >
-              <p className="text-gold-light/70 tracking-widest uppercase text-xs mb-2 font-body">
-                Save the Date
-              </p>
+              {/* Title */}
+              <div>
+                {/* <h2 className="display-text text-4xl md:text-5xl text-gold mb-8">
+                  Save The Date
+                </h2> */}
 
-              <h3 className="display-text text-3xl md:text-4xl text-primary-foreground mb-1">
-                May 17, 2026
-              </h3>
+                {/* Couple */}
+                <p  className="tracking-[0.35em] uppercase text-[11px] text-[#d8a8b8] mb-4">
+                  SHAMSHUDDIN ♥ NAFEESA
+                </p>
 
-              {/* <div
-                className="w-16 h-0.5 mx-auto my-3"
-                style={{ background: "var(--gradient-gold)" }}
-              />
+                {/* Date */}
+                <h1 className="display-text text-[2.3rem] md:text-[2.8rem] text-gold leading-none">
+  02 • 08 • 2026
+</h1>
 
-              <p className="elegant-text text-gold-light text-lg">
-                Nikah at 11:00 AM
-              </p>
+                {/* Day & Time */}
+                <p className="mt-3 text-lg md:text-xl text-primary-foreground/90 elegant-text">
+                  Sunday • 12:00 PM
+                </p>
 
-              <p className="elegant-text text-primary-foreground/80 mt-1">
-                Ajwa Convention Centre, Padapparamb
-              </p> */}
+                {/* Venue */}
+                <div className="mt-5 space-y-1">
+                  <p className="text-[#d8a8b8] text-base md:text-lg elegant-text">
+                    SA1 Function Hall
+                  </p>
 
-              {/* Add to Calendar Button */}
-              {isRevealed && (
-                <motion.a
-                  href={googleCalendarLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
-                  className="inline-block mt-6 px-6 py-3 rounded-full border-2 border-gold text-gold-light font-body tracking-wide text-sm hover:bg-gold/10 transition-all duration-300"
-                >
-                  Add to Calendar
-                </motion.a>
-              )}
+                  <p className="text-[#d8a8b8] text-base md:text-lg elegant-text">
+                    Rajampeta
+                  </p>
+                </div>
+              </div>
+
+              {/* Calendar Button */}
+              
             </motion.div>
           </div>
 
@@ -161,9 +161,7 @@ const ScratchCard = () => {
           <canvas
             ref={canvasRef}
             className={`absolute inset-0 w-full h-full cursor-pointer transition-opacity duration-700 ${
-              isRevealed
-                ? "opacity-0 pointer-events-none"
-                : "opacity-100"
+              isRevealed ? "opacity-0 pointer-events-none" : "opacity-100"
             }`}
             onMouseDown={() => setIsScratching(true)}
             onMouseUp={() => setIsScratching(false)}
@@ -177,7 +175,26 @@ const ScratchCard = () => {
             }}
           />
         </div>
-
+{/* Add to Calendar Button (Outside Card) */}
+{isRevealed && (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5, delay: 0.3 }}
+    className="mt-8"
+  >
+    <motion.a
+      href={googleCalendarLink}
+      target="_blank"
+      rel="noopener noreferrer"
+      whileHover={{ scale: 1.03 }}
+      whileTap={{ scale: 0.97 }}
+      className="inline-flex items-center gap-3 rounded-full border-2 border-[#c9a84c] bg-[#0d1512] px-8 py-4 text-[#d4af37] font-medium transition-all duration-300 hover:bg-[#c9a84c]/10"
+    >
+      📅 Add to Google Calendar
+    </motion.a>
+  </motion.div>
+)}
         {!isRevealed && (
           <p className="text-muted-foreground text-sm mt-4 font-body animate-pulse">
             ↑ Use your finger or mouse to scratch ↑

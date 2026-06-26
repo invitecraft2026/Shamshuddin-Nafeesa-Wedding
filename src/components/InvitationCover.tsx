@@ -109,7 +109,7 @@ const InvitationCover = ({ onOpen }: InvitationCoverProps) => {
           transition={{ delay: 1.2, duration: 0.8 }}
           className="display-text text-4xl md:text-6xl lg:text-7xl text-primary-foreground mb-2"
         >
-          Anas
+          Shamshuddin
         </motion.h1>
 
         {/* Ampersand */}
@@ -129,7 +129,7 @@ const InvitationCover = ({ onOpen }: InvitationCoverProps) => {
           transition={{ delay: 1.6, duration: 0.8 }}
           className="display-text text-4xl md:text-6xl lg:text-7xl text-primary-foreground mb-6"
         >
-          Anshidha
+          Nafeesa
         </motion.h1>
 
         <motion.div
