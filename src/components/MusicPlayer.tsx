@@ -13,7 +13,7 @@ const MusicPlayer = ({ autoPlay = false }: MusicPlayerProps) => {
   useEffect(() => {
     // Use a royalty-free nasheed-style ambient audio
     audioRef.current = new Audio(
-      "humming.mpeg"
+      "yem_maya_chesave.mpeg"
     );
     audioRef.current.loop = true;
     audioRef.current.volume = 0.4;
