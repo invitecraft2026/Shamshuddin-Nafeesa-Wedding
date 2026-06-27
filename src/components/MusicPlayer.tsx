@@ -8,42 +8,66 @@ interface MusicPlayerProps {
 
 const MusicPlayer = ({ autoPlay = false }: MusicPlayerProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isReady, setIsReady] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    // Use a royalty-free nasheed-style ambient audio
-    audioRef.current = new Audio(
-      "yem_maya_chesave.mpeg"
-    );
-    audioRef.current.loop = true;
-    audioRef.current.volume = 0.4;
+    const audio = new Audio();
+
+    // Provide multiple formats — iOS picks what it supports
+    // Best: convert your file to .mp3 and .m4a and host both
+    audio.src = "yem_maya_chesave.mp3"; // ← rename/convert your file to mp3
+    audio.loop = true;
+    audio.volume = 0.4;
+    audio.preload = "none"; // don't preload — iOS blocks it anyway
+
+    audio.addEventListener("canplaythrough", () => setIsReady(true));
+    audio.addEventListener("error", (e) => {
+      console.warn("Audio load error:", e);
+    });
+
+    audioRef.current = audio;
 
     return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current = null;
-      }
+      audio.pause();
+      audio.src = "";
+      audioRef.current = null;
     };
   }, []);
 
+  // autoPlay: only attempt AFTER a user gesture has already happened
+  // (e.g. they tapped "Open Invitation" — pass autoPlay=true after that)
   useEffect(() => {
-    if (autoPlay && audioRef.current) {
-      audioRef.current.play().then(() => {
+    if (!autoPlay || !audioRef.current) return;
+
+    const tryPlay = async () => {
+      try {
+        await audioRef.current!.play();
         setIsPlaying(true);
-      }).catch(() => {
-        // Autoplay blocked by browser
-      });
-    }
+      } catch {
+        // iOS blocked it — user must tap the button manually, that's fine
+        setIsPlaying(false);
+      }
+    };
+
+    tryPlay();
   }, [autoPlay]);
 
-  const toggleMusic = () => {
+  const toggleMusic = async () => {
     if (!audioRef.current) return;
+
     if (isPlaying) {
       audioRef.current.pause();
+      setIsPlaying(false);
     } else {
-      audioRef.current.play();
+      try {
+        // On iOS, play() MUST be called directly inside a user gesture handler
+        await audioRef.current.play();
+        setIsPlaying(true);
+      } catch (err) {
+        console.warn("Playback failed:", err);
+      }
     }
-    setIsPlaying(!isPlaying);
   };
 
   return (
