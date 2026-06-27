@@ -1,29 +1,122 @@
 import { motion, AnimatePresence } from "framer-motion";
 
+// Import your flower corner/side images
+import flowerLeftTop from "/flowerleft-t.png";
+import flowerRightTop from "/flowerright-t.png";
+import flowerLeftBottom from "/flowerleft-b.png";
+import flowerRightBottom from "/flowerright-b.png";
+
+import namesMonogram from "/names.png";
+
 interface InvitationCoverProps {
   onOpen: () => void;
 }
+
+const OrnamentDivider = () => (
+  <svg width="240" height="18" viewBox="0 0 240 18" fill="none">
+    <line
+      x1="0"
+      y1="9"
+      x2="90"
+      y2="9"
+      stroke="#D4AF37"
+      strokeWidth="0.7"
+      opacity="0.6"
+    />
+    <path
+      d="M96 9 C100 4 106 4 110 9 C114 14 120 14 124 9"
+      stroke="#D4AF37"
+      strokeWidth="1"
+      fill="none"
+    />
+    <circle cx="122" cy="9" r="3.5" fill="#D4AF37" opacity="0.85" />
+    <path
+      d="M124 9 C128 4 134 4 138 9 C142 14 148 14 152 9"
+      stroke="#D4AF37"
+      strokeWidth="1"
+      fill="none"
+    />
+    <line
+      x1="150"
+      y1="9"
+      x2="240"
+      y2="9"
+      stroke="#D4AF37"
+      strokeWidth="0.7"
+      opacity="0.6"
+    />
+  </svg>
+);
+
+const LeafBranch = ({ flip }: { flip: boolean }) => (
+  <svg
+    width="70"
+    height="24"
+    viewBox="0 0 70 24"
+    fill="none"
+    style={{ transform: flip ? "scaleX(-1)" : undefined }}
+  >
+    <path
+      d="M2 12 Q24 12 50 6"
+      stroke="#D4AF37"
+      strokeWidth="0.8"
+      opacity="0.65"
+    />
+    <ellipse
+      cx="22"
+      cy="9"
+      rx="8"
+      ry="3.2"
+      transform="rotate(-20 22 9)"
+      fill="#2d6b3a"
+      stroke="#D4AF37"
+      strokeWidth="0.5"
+    />
+    <ellipse
+      cx="36"
+      cy="6.5"
+      rx="7"
+      ry="2.8"
+      transform="rotate(-13 36 6.5)"
+      fill="#245c30"
+      stroke="#D4AF37"
+      strokeWidth="0.5"
+    />
+    <ellipse
+      cx="50"
+      cy="5.5"
+      rx="5.5"
+      ry="2.2"
+      transform="rotate(-7 50 5.5)"
+      fill="#2d6b3a"
+      stroke="#D4AF37"
+      strokeWidth="0.5"
+    />
+    <circle cx="60" cy="4.5" r="2.2" fill="white" opacity="0.88" />
+    <circle cx="47" cy="2.8" r="1.6" fill="white" opacity="0.76" />
+  </svg>
+);
 
 const InvitationCover = ({ onOpen }: InvitationCoverProps) => {
   return (
     <AnimatePresence>
       <motion.div
         className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden"
-        style={{ background: "#0d3320" }}
+        style={{ background: "#0c311e" }}
         exit={{ opacity: 0, scale: 1.05 }}
         transition={{ duration: 0.8, ease: "easeInOut" }}
       >
-        {/* Ambient texture overlay */}
+        {/* ── Ambient glow ── */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              "radial-gradient(ellipse at 30% 20%, rgba(212,175,55,0.07) 0%, transparent 60%), radial-gradient(ellipse at 70% 80%, rgba(212,175,55,0.05) 0%, transparent 55%)",
+              "radial-gradient(ellipse at 25% 20%, rgba(212,175,55,0.07) 0%, transparent 55%), radial-gradient(ellipse at 75% 78%, rgba(212,175,55,0.06) 0%, transparent 50%)",
           }}
         />
 
-        {/* Gold sparkle dots */}
-        {[...Array(28)].map((_, i) => {
+        {/* ── Animated sparkle dots ── */}
+        {[...Array(30)].map((_, i) => {
           const size = 1.5 + Math.random() * 2.5;
           return (
             <motion.div
@@ -32,368 +125,311 @@ const InvitationCover = ({ onOpen }: InvitationCoverProps) => {
               style={{
                 width: size,
                 height: size,
-                top: `${5 + Math.random() * 90}%`,
-                left: `${5 + Math.random() * 90}%`,
+                top: `${4 + Math.random() * 92}%`,
+                left: `${4 + Math.random() * 92}%`,
                 background: "#D4AF37",
-                opacity: 0.25 + Math.random() * 0.4,
               }}
-              animate={{ opacity: [0.2, 0.7, 0.2], scale: [1, 1.4, 1] }}
+              animate={{ opacity: [0.15, 0.65, 0.15], scale: [1, 1.5, 1] }}
               transition={{
-                duration: 2.5 + Math.random() * 2,
+                duration: 2.5 + Math.random() * 2.5,
                 repeat: Infinity,
-                delay: Math.random() * 3,
+                delay: Math.random() * 4,
                 ease: "easeInOut",
               }}
             />
           );
         })}
 
-        {/* Outer gold border frame */}
+        {/* ── Full-screen gold double border frame ── */}
         <div
-          className="relative w-full h-full max-w-sm mx-auto"
-          style={{ maxHeight: "96vh" }}
+          className="absolute inset-0 pointer-events-none"
+          style={{ zIndex: 10 }}
         >
-          {/* Double border frame */}
+          {/* Outer border */}
           <div
-            className="absolute inset-3 pointer-events-none"
+            className="absolute"
             style={{
-              border: "1.5px solid rgba(212,175,55,0.8)",
-              borderRadius: 2,
-              zIndex: 10,
+              inset: "clamp(8px, 2vw, 20px)",
+              border: "1.5px solid rgba(212,175,55,0.82)",
             }}
           />
+          {/* Inner border */}
           <div
-            className="absolute inset-5 pointer-events-none"
+            className="absolute"
             style={{
-              border: "0.5px solid rgba(212,175,55,0.4)",
-              borderRadius: 1,
-              zIndex: 10,
+              inset: "clamp(14px, 3vw, 32px)",
+              border: "0.6px solid rgba(212,175,55,0.38)",
             }}
           />
+        </div>
 
-          {/* Corner ornaments — SVG filigree */}
-          {(["tl", "tr", "bl", "br"] as const).map((pos) => {
-            const isRight = pos.includes("r");
-            const isBottom = pos.includes("b");
-            return (
-              <svg
-                key={pos}
-                width="64"
-                height="64"
-                viewBox="0 0 64 64"
-                className="absolute pointer-events-none"
-                style={{
-                  zIndex: 20,
-                  top: isBottom ? undefined : 4,
-                  bottom: isBottom ? 4 : undefined,
-                  left: isRight ? undefined : 4,
-                  right: isRight ? 4 : undefined,
-                  transform: `scale(${isRight ? -1 : 1}, ${isBottom ? -1 : 1})`,
-                  opacity: 0.85,
-                }}
-              >
-                {/* Corner bracket lines */}
-                <path
-                  d="M4 4 L4 28 M4 4 L28 4"
-                  stroke="#D4AF37"
-                  strokeWidth="1.5"
-                  fill="none"
-                />
-                {/* Decorative corner leaf cluster */}
-                <g fill="#2d6b3a" stroke="#D4AF37" strokeWidth="0.6">
-                  {/* Main leaf top-right */}
-                  <ellipse
-                    cx="28"
-                    cy="12"
-                    rx="8"
-                    ry="4"
-                    transform="rotate(-45 28 12)"
-                  />
-                  <ellipse
-                    cx="38"
-                    cy="10"
-                    rx="7"
-                    ry="3.5"
-                    transform="rotate(-30 38 10)"
-                  />
-                  <ellipse
-                    cx="46"
-                    cy="16"
-                    rx="6"
-                    ry="3"
-                    transform="rotate(-15 46 16)"
-                  />
-                  <ellipse
-                    cx="12"
-                    cy="28"
-                    rx="4"
-                    ry="8"
-                    transform="rotate(-45 12 28)"
-                  />
-                  <ellipse
-                    cx="10"
-                    cy="38"
-                    rx="3.5"
-                    ry="7"
-                    transform="rotate(-60 10 38)"
-                  />
-                  <ellipse
-                    cx="16"
-                    cy="46"
-                    rx="3"
-                    ry="6"
-                    transform="rotate(-75 16 46)"
-                  />
-                  {/* Small accent leaves */}
-                  <ellipse
-                    cx="34"
-                    cy="20"
-                    rx="5"
-                    ry="2.5"
-                    transform="rotate(-55 34 20)"
-                  />
-                  <ellipse
-                    cx="20"
-                    cy="34"
-                    rx="2.5"
-                    ry="5"
-                    transform="rotate(-35 20 34)"
-                  />
-                </g>
-                {/* Gold stem lines */}
-                <path
-                  d="M8 8 Q22 14 36 28 Q44 36 52 52"
-                  stroke="#D4AF37"
-                  strokeWidth="0.8"
-                  fill="none"
-                  opacity="0.6"
-                />
-                {/* Tiny white blossom dots */}
-                <circle cx="30" cy="8" r="2" fill="white" opacity="0.9" />
-                <circle cx="42" cy="12" r="1.5" fill="white" opacity="0.8" />
-                <circle cx="50" cy="22" r="1.5" fill="white" opacity="0.8" />
-                <circle cx="8" cy="30" r="2" fill="white" opacity="0.9" />
-                <circle cx="12" cy="42" r="1.5" fill="white" opacity="0.8" />
-                <circle cx="22" cy="50" r="1.5" fill="white" opacity="0.8" />
-              </svg>
-            );
-          })}
+        {/* ══════════════════════════════════════
+            FLOWER CORNER IMAGES
+            Each image is absolutely placed at its
+            corner with z-index above the border frame.
+            clamp() sizes them to look right on any screen.
+        ══════════════════════════════════════ */}
 
-          {/* Main content */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center px-8 z-30">
-            {/* NS Monogram */}
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.9 }}
-              className="mb-4"
-            >
-              <svg width="72" height="80" viewBox="0 0 72 80" fill="none">
-                <defs>
-                  <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stopColor="#F5E07A" />
-                    <stop offset="40%" stopColor="#D4AF37" />
-                    <stop offset="100%" stopColor="#A87C1F" />
-                  </linearGradient>
-                </defs>
-                {/* N */}
-                <path
-                  d="M8 16 L8 58 L32 16 L32 58"
-                  stroke="url(#goldGrad)"
-                  strokeWidth="5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  fill="none"
-                />
-                {/* S */}
-                <path
-                  d="M42 22 C42 17 50 14 56 16 C64 18 66 26 60 30 C54 34 46 36 44 42 C42 48 46 56 56 58 C62 60 68 56 68 52"
-                  stroke="url(#goldGrad)"
-                  strokeWidth="5"
-                  strokeLinecap="round"
-                  fill="none"
-                />
-              </svg>
-            </motion.div>
+        {/* Top-left corner flower */}
+        <motion.img
+          src={flowerLeftTop}
+          alt=""
+          aria-hidden="true"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.9 }}
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "clamp(120px, 18vw, 220px)",
+            height: "auto",
+            pointerEvents: "none",
+            zIndex: 20,
+            objectFit: "contain",
+          }}
+        />
 
-            {/* Top ornamental divider */}
-            <motion.div
-              initial={{ scaleX: 0, opacity: 0 }}
-              animate={{ scaleX: 1, opacity: 1 }}
-              transition={{ delay: 0.7, duration: 0.6 }}
-              className="flex items-center gap-2 mb-5 w-full justify-center"
-            >
-              <OrnamentDivider />
-            </motion.div>
+        {/* Top-right corner flower */}
+        <motion.img
+          src={flowerRightTop}
+          alt=""
+          aria-hidden="true"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3, duration: 0.9 }}
+          style={{
+            position: "absolute",
+            top: 0,
+            right: 0,
+            width: "clamp(120px, 18vw, 220px)",
+            height: "auto",
+            pointerEvents: "none",
+            zIndex: 20,
+            objectFit: "contain",
+          }}
+        />
 
-            {/* "THE WEDDING OF" */}
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.9, duration: 0.7 }}
-              style={{
-                color: "#D4AF37",
-                letterSpacing: "0.28em",
-                fontSize: "11px",
-                fontFamily: "Georgia, serif",
-                fontWeight: 600,
-                textTransform: "uppercase",
-                marginBottom: "16px",
-              }}
-            >
-              The Wedding Of
-            </motion.p>
+        {/* Bottom-left corner flower */}
+        <motion.img
+          src={flowerLeftBottom}
+          alt=""
+          aria-hidden="true"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4, duration: 0.9 }}
+          style={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            width: "clamp(120px, 18vw, 220px)",
+            height: "auto",
+            pointerEvents: "none",
+            zIndex: 20,
+            objectFit: "contain",
+          }}
+        />
 
-            {/* Groom */}
-            <motion.h1
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.1, duration: 0.8 }}
-              style={{
-                fontFamily: "'Palatino Linotype', Palatino, Georgia, serif",
-                fontSize: "clamp(36px, 9vw, 52px)",
-                fontWeight: 400,
-                color: "#FFFFFF",
-                lineHeight: 1.1,
-                marginBottom: "4px",
-                textAlign: "center",
-              }}
-            >
-              Shamshuddin
-            </motion.h1>
+        {/* Bottom-right corner flower */}
+        <motion.img
+          src={flowerRightBottom}
+          alt=""
+          aria-hidden="true"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5, duration: 0.9 }}
+          style={{
+            position: "absolute",
+            bottom: 0,
+            right: 0,
+            width: "clamp(120px, 18vw, 220px)",
+            height: "auto",
+            pointerEvents: "none",
+            zIndex: 20,
+            objectFit: "contain",
+          }}
+        />
 
-            {/* Leaf & ampersand divider */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.6 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 1.35, duration: 0.6 }}
-              className="flex items-center gap-3 my-2"
-            >
-              <LeafBranch flip={false} />
-              <span
-                style={{
-                  fontFamily: "'Palatino Linotype', Palatino, Georgia, serif",
-                  fontSize: "32px",
-                  color: "#D4AF37",
-                  fontStyle: "italic",
-                  lineHeight: 1,
-                }}
-              >
-                &amp;
-              </span>
-              <LeafBranch flip={true} />
-            </motion.div>
-
-            {/* Bride */}
-            <motion.h1
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.5, duration: 0.8 }}
-              style={{
-                fontFamily: "'Palatino Linotype', Palatino, Georgia, serif",
-                fontSize: "clamp(36px, 9vw, 52px)",
-                fontWeight: 400,
-                color: "#FFFFFF",
-                lineHeight: 1.1,
-                marginTop: "4px",
-                textAlign: "center",
-              }}
-            >
-              Nafeesa
-            </motion.h1>
-
-            {/* Bottom divider */}
-            <motion.div
-              initial={{ scaleX: 0, opacity: 0 }}
-              animate={{ scaleX: 1, opacity: 1 }}
-              transition={{ delay: 1.75, duration: 0.7 }}
-              className="flex items-center gap-2 mt-5 mb-7 w-full justify-center"
-            >
-              <OrnamentDivider />
-            </motion.div>
-
-            {/* CTA Button */}
-            <motion.button
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 2.1, duration: 0.7 }}
-              whileHover={{ scale: 1.04, boxShadow: "0 0 28px rgba(212,175,55,0.4)" }}
-              whileTap={{ scale: 0.97 }}
-              onClick={onOpen}
-              style={{
-                border: "1.5px solid #D4AF37",
-                borderRadius: "40px",
-                background: "transparent",
-                padding: "13px 32px",
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                gap: "8px",
-                color: "#D4AF37",
-                fontFamily: "Georgia, serif",
-                fontSize: "11px",
-                letterSpacing: "0.22em",
-                textTransform: "uppercase",
-                fontWeight: 500,
-                transition: "all 0.25s ease",
-              }}
-            >
-              <span style={{ color: "#D4AF37", fontSize: "14px" }}>⟶</span>
-              Tap to Open Invitation
-              <span style={{ color: "#D4AF37", fontSize: "14px" }}>⟵</span>
-            </motion.button>
-          </div>
-
-          {/* Bottom ornament */}
+        {/* ── Centred content ── */}
+        <div
+          className="relative z-30 flex flex-col items-center text-center px-10"
+          style={{ width: "100%", maxWidth: 560 }}
+        >
+          {/* NS Monogram */}
+          {/* NS Monogram + ornament image — replaces SVG and top divider */}
           <motion.div
+            initial={{ opacity: 0, y: -22 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.9 }}
+            style={{ marginBottom: "clamp(16px, 3vh, 28px)" }}
+          >
+            <img
+              src={namesMonogram}
+              alt="NS monogram"
+              style={{
+                width: "clamp(140px, 22vw, 260px)",
+                height: "auto",
+                objectFit: "contain",
+                display: "block",
+                margin: "0 auto",
+              }}
+            />
+          </motion.div>
+
+          {/* "THE WEDDING OF" */}
+          <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 2.3, duration: 0.8 }}
-            className="absolute bottom-8 left-0 right-0 flex justify-center"
-            style={{ zIndex: 30 }}
+            transition={{ delay: 0.9, duration: 0.7 }}
+            style={{
+              color: "#D4AF37",
+              letterSpacing: "0.3em",
+              fontSize: "clamp(10px, 1.2vw, 13px)",
+              fontFamily: "Georgia, serif",
+              fontWeight: 600,
+              textTransform: "uppercase",
+              marginBottom: "clamp(12px, 2.5vh, 22px)",
+            }}
           >
-            <svg width="48" height="28" viewBox="0 0 48 28" fill="none">
-              <path
-                d="M24 2 C20 8 12 10 8 16 C12 14 18 15 24 20 C30 15 36 14 40 16 C36 10 28 8 24 2Z"
-                fill="#D4AF37"
-                opacity="0.7"
-              />
-              <circle cx="24" cy="24" r="3" fill="#D4AF37" opacity="0.6" />
-              <circle cx="12" cy="20" r="1.5" fill="#D4AF37" opacity="0.4" />
-              <circle cx="36" cy="20" r="1.5" fill="#D4AF37" opacity="0.4" />
-            </svg>
+            The Wedding Of
+          </motion.p>
+
+          {/* Groom name */}
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.1, duration: 0.8 }}
+            style={{
+              fontFamily: "'Palatino Linotype', Palatino, Georgia, serif",
+              fontSize: "clamp(38px, 7vw, 72px)",
+              fontWeight: 400,
+              color: "#FFFFFF",
+              lineHeight: 1.05,
+              marginBottom: "clamp(2px, 0.5vh, 6px)",
+            }}
+          >
+            Shamshuddin
+          </motion.h1>
+
+          {/* Leaf & ampersand row */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.6 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 1.35, duration: 0.6 }}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "clamp(8px, 1.5vw, 16px)",
+              margin: "clamp(6px, 1vh, 12px) 0",
+            }}
+          >
+            <LeafBranch flip={false} />
+            <span
+              style={{
+                fontFamily: "'Palatino Linotype', Palatino, Georgia, serif",
+                fontSize: "clamp(28px, 4vw, 40px)",
+                color: "#D4AF37",
+                fontStyle: "italic",
+                lineHeight: 1,
+              }}
+            >
+              &amp;
+            </span>
+            <LeafBranch flip={true} />
           </motion.div>
+
+          {/* Bride name */}
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.5, duration: 0.8 }}
+            style={{
+              fontFamily: "'Palatino Linotype', Palatino, Georgia, serif",
+              fontSize: "clamp(38px, 7vw, 72px)",
+              fontWeight: 400,
+              color: "#FFFFFF",
+              lineHeight: 1.05,
+              marginTop: "clamp(2px, 0.5vh, 6px)",
+            }}
+          >
+            Nafeesa
+          </motion.h1>
+
+          {/* Bottom ornamental divider */}
+          <motion.div
+            initial={{ scaleX: 0, opacity: 0 }}
+            animate={{ scaleX: 1, opacity: 1 }}
+            transition={{ delay: 1.75, duration: 0.7 }}
+            style={{
+              marginTop: "clamp(14px, 2.5vh, 28px)",
+              marginBottom: "clamp(18px, 3vh, 36px)",
+            }}
+          >
+            <OrnamentDivider />
+          </motion.div>
+
+          {/* CTA button */}
+          <motion.button
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 2.1, duration: 0.7 }}
+            whileHover={{
+              scale: 1.04,
+              boxShadow: "0 0 32px rgba(212,175,55,0.38)",
+            }}
+            whileTap={{ scale: 0.97 }}
+            onClick={onOpen}
+            style={{
+              border: "1.5px solid #D4AF37",
+              borderRadius: "40px",
+              background: "transparent",
+              padding: "clamp(10px, 1.5vh, 15px) clamp(24px, 4vw, 44px)",
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              gap: "clamp(6px, 1vw, 10px)",
+              color: "#D4AF37",
+              fontFamily: "Georgia, serif",
+              fontSize: "clamp(9px, 1vw, 12px)",
+              letterSpacing: "0.22em",
+              textTransform: "uppercase",
+              fontWeight: 500,
+              transition: "all 0.25s ease",
+            }}
+          >
+            <span style={{ fontSize: "clamp(12px, 1.4vw, 16px)" }}>⟶</span>
+            Tap to Open Invitation
+            <span style={{ fontSize: "clamp(12px, 1.4vw, 16px)" }}>⟵</span>
+          </motion.button>
         </div>
+
+        {/* Bottom centre ornament */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2.3, duration: 0.9 }}
+          style={{
+            position: "absolute",
+            bottom: "clamp(18px, 4vh, 44px)",
+            left: "50%",
+            transform: "translateX(-50%)",
+            zIndex: 30,
+          }}
+        >
+          <svg width="54" height="32" viewBox="0 0 54 32" fill="none">
+            <path
+              d="M27 2 C22 9 13 11 8 18 C13 16 20 17 27 23 C34 17 41 16 46 18 C41 11 32 9 27 2Z"
+              fill="#D4AF37"
+              opacity="0.68"
+            />
+            <circle cx="27" cy="28" r="3.5" fill="#D4AF37" opacity="0.55" />
+            <circle cx="13" cy="23" r="1.8" fill="#D4AF37" opacity="0.38" />
+            <circle cx="41" cy="23" r="1.8" fill="#D4AF37" opacity="0.38" />
+          </svg>
+        </motion.div>
       </motion.div>
     </AnimatePresence>
   );
 };
-
-const OrnamentDivider = () => (
-  <svg width="220" height="18" viewBox="0 0 220 18" fill="none">
-    <line x1="0" y1="9" x2="78" y2="9" stroke="#D4AF37" strokeWidth="0.7" opacity="0.6" />
-    <path d="M84 9 C88 4 94 4 98 9 C102 14 108 14 112 9" stroke="#D4AF37" strokeWidth="1" fill="none" />
-    <circle cx="110" cy="9" r="3" fill="#D4AF37" opacity="0.8" />
-    <path d="M112 9 C116 4 122 4 126 9 C130 14 136 14 140 9" stroke="#D4AF37" strokeWidth="1" fill="none" />
-    <line x1="142" y1="9" x2="220" y2="9" stroke="#D4AF37" strokeWidth="0.7" opacity="0.6" />
-  </svg>
-);
-
-const LeafBranch = ({ flip }: { flip: boolean }) => (
-  <svg
-    width="60"
-    height="22"
-    viewBox="0 0 60 22"
-    fill="none"
-    style={{ transform: flip ? "scaleX(-1)" : undefined }}
-  >
-    <path d="M2 11 Q20 11 42 6" stroke="#D4AF37" strokeWidth="0.8" opacity="0.7" />
-    <ellipse cx="20" cy="8" rx="7" ry="3" transform="rotate(-20 20 8)" fill="#2d6b3a" stroke="#D4AF37" strokeWidth="0.5" />
-    <ellipse cx="34" cy="6" rx="6" ry="2.5" transform="rotate(-15 34 6)" fill="#2d6b3a" stroke="#D4AF37" strokeWidth="0.5" />
-    <ellipse cx="46" cy="5" rx="5" ry="2" transform="rotate(-10 46 5)" fill="#2d6b3a" stroke="#D4AF37" strokeWidth="0.5" />
-    <circle cx="55" cy="4" r="2" fill="white" opacity="0.85" />
-    <circle cx="43" cy="3" r="1.5" fill="white" opacity="0.75" />
-  </svg>
-);
 
 export default InvitationCover;
